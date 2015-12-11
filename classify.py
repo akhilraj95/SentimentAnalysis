@@ -1,6 +1,9 @@
 import re
+import math
 
-PROBABILITYTABLE = []
+PROBWORD = []
+PROBPOS = []
+PROBNEG = []
 DATA_LIST = []
 positive = 0.5
 negative = 0.5
@@ -17,17 +20,31 @@ def constructVocabulary(FILE_NAME):
 
 def loadTraining():
     """Loading the probability table from Table file"""
-    f = open("Table",r)
+    f = open("Table",'r')
     for line in f:
         temparr = []
         temp = line.split()
-        temparr.append(temp[0])
-        temparr.append(temp[1])
-        temparr.append(temp[2])
-        PROBABILITYTABLE.append(temparr)
+        PROBWORD.append(temp[0])
+        PROBPOS.append(temp[1])
+        PROBNEG.append(temp[2])
 
 def calculateProbability():
     """Calculating positive and negative probability"""
+    p = math.log(positive)
+    n = math.log(negative)
+
+
+    for word in DATA_LIST:
+        if(word in PROBWORD):
+            index = PROBWORD.index(word)
+            p = p + math.log(float(PROBPOS[index]))
+            n = n + math.log(float(PROBNEG[index]))
+    print("\npositive="+str(p))
+    print("\nnegative="+str(n))
+    if(p>n):
+        print("\nRESULT : POSITIVE")
+    else:
+        print("\nRESULT : NEGATIVE")
 
 
 def classify():
