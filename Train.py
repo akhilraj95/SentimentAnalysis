@@ -6,7 +6,7 @@ negative = []
 
 def readfile():
     """fucntion to get the data from the training corpus"""
-    print("\n  -reading positive training corpus...")
+    print(" -reading positive training corpus...")
     f = open("positive.txt",'r')
     for line in f:
         line = re.sub('[!@#$.:{}()""-=;,]', '', line)
@@ -14,7 +14,7 @@ def readfile():
            positve.append(word)
            if(word not in vocabulary):
                vocabulary.append(word)
-    print("\n  -reading positive training corpus...")
+    print(" -reading positive training corpus...")
     f = open("negative.txt",'r')
     for line in f:
         line = re.sub('[!@#$.:{}()""-=;,]', '', line)
@@ -42,5 +42,7 @@ def buildProbabilityTable():
 def initialise():
     print("\ncompiling the vocabulary from training corpus -")
     readfile()
+    print("\nbuilding the probability table-")
     buildProbabilityTable()
+
 
