@@ -15,8 +15,9 @@ def constructVocabulary(FILE_NAME):
     for line in f:
         line = re.sub('[!@#$.:{}()""-=;,]', '', line)
         for word in line.split():
-           if(word not in DATA_LIST):
-               DATA_LIST.append(word)
+            if(word!="the" and word!="a" and word!="is"):
+                if(word not in DATA_LIST):
+                    DATA_LIST.append(word)
 
 def loadTraining():
     """Loading the probability table from Table file"""
@@ -43,8 +44,10 @@ def calculateProbability():
     print("\nnegative="+str(n))
     if(p>n):
         print("\nRESULT : POSITIVE")
+        print("CONFIDENCE : positive probability "+str(p-n)+" times the negative")
     else:
         print("\nRESULT : NEGATIVE")
+        print("CONFIDENCE : negative probability "+str(n-p)+" times the positive")
 
 
 def classify():
